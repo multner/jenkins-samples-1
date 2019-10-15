@@ -18,7 +18,18 @@ node () {
  		} 
 	}
 	stage ('App-IC - Post build actions') {
-/*
+
+		stage ('APP-IC - Quality Analysis') {
+	withMaven(maven: 'maven-3.5.4') { 
+ 			if(isUnix()) {
+ 				sh "mvn sonar:sonar" 
+			} else { 
+ 				bat "mvn sonar:sonar" 
+			} 
+ 		} 
+}
+
+		/*
 Please note this is a direct conversion of post-build actions. 
 It may not necessarily work/behave in the same way as post-build actions work.
 A logic review is suggested.
